@@ -1,10 +1,11 @@
 import { Toaster } from "react-hot-toast";
+import Form from "./Components/Form";
 
 function App() {
   return (
     <>
       <Toaster />
-      <h1 className="text-blue-500">Hello world</h1>;
+      <Form />
     </>
   );
 }
