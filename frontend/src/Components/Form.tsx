@@ -1,14 +1,29 @@
 import { useState } from "react";
 import Field from "./Field";
+import axios from "axios";
 
 export default function Form() {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     e.preventDefault();
-    console.log("Hello");
+
+    const shipment = {
+      description,
+      quantity,
+      price,
+    };
+
+    await axios.post("http://localhost:8000/generate-invoice", shipment);
+    console.log("Shipment object sent off to port 8000");
+
+    setDescription("");
+    setQuantity(0);
+    setPrice(0);
   };
 
   return (
@@ -23,6 +38,7 @@ export default function Form() {
       />
       <Field label="Quantity" value={quantity} setValue={setQuantity} />
       <Field label="Price" value={price} setValue={setPrice} />
+      <button>Submit</button>
     </form>
   );
 }

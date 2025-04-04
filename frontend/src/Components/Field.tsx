@@ -16,7 +16,7 @@ export default function Field<T extends string | number>({
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value as T)}
-        className="bg-white hover:cursor-pointer"
+        className="border-2 bg-white hover:cursor-pointer"
       />
     </div>
   );
