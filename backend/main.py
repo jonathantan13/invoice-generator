@@ -30,3 +30,5 @@ async def root():
 @app.post("/generate-invoice")
 async def generate_invoice(shipment: Shipment):
     return {"quantity": shipment.quantity, "description": shipment.description, "price": shipment.price}
+
+# TODO: redirect & send object to an invoice template 
