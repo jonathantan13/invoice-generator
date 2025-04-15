@@ -1,3 +1,5 @@
+"use client";
+
 interface Input<T extends string | number> {
   length: string;
   label: string;

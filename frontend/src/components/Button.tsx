@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 interface ButtonProps {
@@ -11,6 +13,7 @@ export default function Button({ onClick, label }: ButtonProps) {
       <button
         onClick={onClick}
         className="w-16 bg-blue-500 text-white hover:cursor-pointer"
+        type="button"
       >
         {label}
       </button>
@@ -19,7 +22,11 @@ export default function Button({ onClick, label }: ButtonProps) {
 
   if (label === "Clear") {
     return (
-      <button onClick={onClick} className="w-16 border hover:cursor-pointer">
+      <button
+        onClick={onClick}
+        className="w-16 border hover:cursor-pointer"
+        type="button"
+      >
         {label}
       </button>
     );

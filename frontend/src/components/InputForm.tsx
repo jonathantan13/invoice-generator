@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "./Button";
 import Input from "./Input";
 
@@ -10,6 +12,7 @@ interface InputForm {
   setItemName: (value: string) => void;
   setQuantity: (value: number) => void;
   setUnitPrice: (value: number) => void;
+  createObject: () => void;
   resetForm: () => void;
 }
 
@@ -22,10 +25,11 @@ export default function InputForm({
   setItemName,
   setQuantity,
   setUnitPrice,
+  createObject,
   resetForm,
 }: InputForm) {
   return (
-    <form action="" className="max-w-8xl flex flex-col">
+    <form className="max-w-8xl flex flex-col">
       <Input
         length="w-[20rem]"
         label="Your Name"
@@ -55,7 +59,7 @@ export default function InputForm({
         onChange={setUnitPrice}
       />
       <div className="flex w-[10rem] justify-between">
-        {/* <Button onClick={resetForm} label="Clear" /> */}
+        <Button onClick={createObject} label="Submit" />
         <Button onClick={resetForm} label="Clear" />
       </div>
     </form>
