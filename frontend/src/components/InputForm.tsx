@@ -1,33 +1,43 @@
 "use client";
 
+import { useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
+import { Item } from "@/app/page";
 
-interface InputForm {
-  name: string;
-  itemName: string;
-  quantity: number;
-  unitPrice: number;
-  setName: (value: string) => void;
-  setItemName: (value: string) => void;
-  setQuantity: (value: number) => void;
-  setUnitPrice: (value: number) => void;
-  createObject: () => void;
-  resetForm: () => void;
+interface setItems {
+  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
 }
 
-export default function InputForm({
-  name,
-  itemName,
-  quantity,
-  unitPrice,
-  setName,
-  setItemName,
-  setQuantity,
-  setUnitPrice,
-  createObject,
-  resetForm,
-}: InputForm) {
+export default function InputForm({ setItems }: setItems) {
+  const [name, setName] = useState("");
+  const [itemName, setItemName] = useState("");
+  const [quantity, setQuantity] = useState(0);
+  const [unitPrice, setUnitPrice] = useState(0);
+
+  function resetForm() {
+    console.log("Reset form called");
+    setName("");
+    setItemName("");
+    setQuantity(0);
+    setUnitPrice(0);
+  }
+
+  function createObject() {
+    if (!name || !itemName || !quantity || !unitPrice)
+      return console.log("Please do not leave anything out!");
+
+    const item = {
+      name,
+      itemName,
+      quantity,
+      unitPrice,
+    };
+
+    setItems((items) => [...items, item]);
+    resetForm();
+  }
+
   return (
     <form className="max-w-8xl flex flex-col">
       <Input
