@@ -2,32 +2,26 @@
 
 import React from "react";
 
-interface ButtonProps {
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+interface Button {
   label: string;
 }
 
-export default function Button({ onClick, label }: ButtonProps) {
-  if (label === "Submit") {
+export default function Button({ label }: Button) {
+  if (label === "submit") {
     return (
       <button
-        onClick={onClick}
+        type="submit"
         className="w-16 bg-blue-500 text-white hover:cursor-pointer"
-        type="button"
       >
-        {label}
+        Submit
       </button>
     );
   }
 
-  if (label === "Clear") {
+  if (label === "clear") {
     return (
-      <button
-        onClick={onClick}
-        className="w-16 border hover:cursor-pointer"
-        type="button"
-      >
-        {label}
+      <button type="reset" className="w-16 border hover:cursor-pointer">
+        Clear
       </button>
     );
   }
