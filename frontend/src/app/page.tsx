@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className="mx-auto mt-8 flex max-w-4xl justify-between">
       <List itemsObj={items} />
-      <InputForm />
+      <InputForm setItems={setItems} />
     </div>
   );
 }
