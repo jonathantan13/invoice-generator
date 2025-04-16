@@ -1,77 +1,57 @@
 "use client";
 
-import { useState } from "react";
-import Button from "./Button";
-import Input from "./Input";
-import { Item } from "@/app/page";
+import React, { startTransition, useActionState } from "react";
+import * as actions from "@/actions";
 
-interface setItems {
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
-}
+export default function InputForm() {
+  const [formState, action, isPending] = useActionState(
+    actions.submitFormInput,
+    {
+      message: "",
+    },
+  );
 
-export default function InputForm({ setItems }: setItems) {
-  const [name, setName] = useState("");
-  const [itemName, setItemName] = useState("");
-  const [quantity, setQuantity] = useState(0);
-  const [unitPrice, setUnitPrice] = useState(0);
-
-  function resetForm() {
-    console.log("Reset form called");
-    setName("");
-    setItemName("");
-    setQuantity(0);
-    setUnitPrice(0);
-  }
-
-  function createObject() {
-    if (!name || !itemName || !quantity || !unitPrice)
-      return console.log("Please do not leave anything out!");
-
-    const item = {
-      name,
-      itemName,
-      quantity,
-      unitPrice,
-    };
-
-    setItems((items) => [...items, item]);
-    resetForm();
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    startTransition(() => {
+      action(formData);
+    });
   }
 
   return (
-    <form className="max-w-8xl flex flex-col">
-      <Input
-        length="w-[20rem]"
-        label="Your Name"
-        type="text"
-        input={name}
-        onChange={setName}
-      />
-      <Input
-        length="w-[20rem]"
-        label="Item Name"
-        type="text"
-        input={itemName}
-        onChange={setItemName}
-      />
-      <Input
-        length="w-[10rem]"
-        label="Quantity"
-        type="number"
-        input={quantity}
-        onChange={setQuantity}
-      />
-      <Input
-        length="w-[10rem]"
-        label="Unit Price"
-        type="number"
-        input={unitPrice}
-        onChange={setUnitPrice}
-      />
-      <div className="flex w-[10rem] justify-between">
-        <Button onClick={createObject} label="Submit" />
-        <Button onClick={resetForm} label="Clear" />
+    <form className="max-w-8xl flex flex-col" onSubmit={handleSubmit}>
+      <label htmlFor=""></label>
+      <input name="name" type="text" className="border" />
+      <div className="flex gap-8">
+        <button
+          type="submit"
+          disabled={isPending}
+          className="w-16 bg-blue-500 text-white hover:cursor-pointer"
+        >
+          Submit
+        </button>
+        <button type="reset" disabled={isPending}>
+          Clear
+        </button>
       </div>
+      {formState.message}
     </form>
   );
 }
+
+{
+  /* <div className="flex w-[10rem] justify-between">
+  <Button onClick={createObject} label="Submit" />
+  <Button onClick={resetForm} label="Clear" />
+</div> */
+}
+
+/* <Input
+  length="w-[20rem]"
+  label="Your Name"
+  type="text"
+  input={name}
+  onChange={setName}
+  />
+  */
