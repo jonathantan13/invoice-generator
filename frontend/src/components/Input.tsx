@@ -1,22 +1,33 @@
 "use client";
 
-interface Input {
-  length: string | undefined;
-  type: string | undefined;
+interface Input<T extends string | number> {
+  length: string;
   label: string;
-  name: string;
+  type: string;
+  input: T;
+  onChange: (value: T) => void;
 }
 
-export default function Input({
+export default function Input<T extends string | number>({
   length = "w-[5rem]",
-  type = "text",
   label,
-  name,
-}: Input) {
+  type,
+  input,
+  onChange,
+}: Input<T>) {
   return (
     <div className={`mb-4 flex max-w-2xl flex-col`}>
-      <label>{label}</label>
-      <input type={type} name={name} className={`${length} border px-1`} />
+      <label htmlFor="">{label}</label>
+      <input
+        type={type}
+        className={`${length} border px-1`}
+        value={input}
+        onChange={(e) => {
+          const value =
+            type === "number" ? Number(e.target.value) : e.target.value;
+          onChange(value as T);
+        }}
+      />
     </div>
   );
 }

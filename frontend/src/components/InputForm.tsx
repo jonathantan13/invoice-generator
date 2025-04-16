@@ -2,13 +2,14 @@
 
 import React, { startTransition, useActionState } from "react";
 import * as actions from "@/actions";
-import Input from "./Input";
-import Button from "./Button";
 
 export default function InputForm() {
-  const [formState, action] = useActionState(actions.submitFormInput, {
-    message: "",
-  });
+  const [formState, action, isPending] = useActionState(
+    actions.submitFormInput,
+    {
+      message: "",
+    },
+  );
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,27 +21,37 @@ export default function InputForm() {
 
   return (
     <form className="max-w-8xl flex flex-col" onSubmit={handleSubmit}>
-      <Input label="Name" name="name" length="w-[20rem]" type="text" />
-      <Input label="Item Name" name="itemName" length="w-[20rem]" type="text" />
-      <Input
-        label="Quantity"
-        name="quantity"
-        length="w-[10rem]"
-        type="number"
-      />
-      <Input
-        label="Unit Price"
-        name="unitPrice"
-        length="w-[10rem]"
-        type="number"
-      />
+      <label htmlFor=""></label>
+      <input name="name" type="text" className="border" />
       <div className="flex gap-8">
-        <Button label="submit" />
-        <Button label="clear" />
+        <button
+          type="submit"
+          disabled={isPending}
+          className="w-16 bg-blue-500 text-white hover:cursor-pointer"
+        >
+          Submit
+        </button>
+        <button type="reset" disabled={isPending}>
+          Clear
+        </button>
       </div>
-      {formState.message && (
-        <span className="bg-red-500 text-white">{formState.message}</span>
-      )}
+      {formState.message}
     </form>
   );
 }
+
+{
+  /* <div className="flex w-[10rem] justify-between">
+  <Button onClick={createObject} label="Submit" />
+  <Button onClick={resetForm} label="Clear" />
+</div> */
+}
+
+/* <Input
+  length="w-[20rem]"
+  label="Your Name"
+  type="text"
+  input={name}
+  onChange={setName}
+  />
+  */
