@@ -1,5 +1,25 @@
 "use server";
 
-export default function submitForm() {
-  //TODO: Get all form data here, assign an id, ship to backend
+interface Item {
+  id: string;
+  name: string;
+  itemName: string;
+  quantity: number;
+  unitPrice: number;
+}
+
+export default async function submitForm(data: FormData) {
+  const list: Item[] = [];
+
+  for (const [key, value] of data.entries()) {
+    if (key.startsWith("item-")) {
+      if (typeof value == "string") {
+        const obj = JSON.parse(value);
+        list.push(obj);
+      }
+    }
+  }
+
+  console.log(list);
+  //It's ready to ship off to the API now
 }

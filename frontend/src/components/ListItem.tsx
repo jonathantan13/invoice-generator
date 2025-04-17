@@ -29,7 +29,11 @@ export default function ListItem({
           <p>${unitPrice}</p>
         </div>
       </div>
-      <button onClick={() => onRemoveItem(id)} type="button">
+      <button
+        onClick={() => onRemoveItem(id)}
+        type="button"
+        className="hover:cursor-pointer"
+      >
         ❌
       </button>
     </li>
