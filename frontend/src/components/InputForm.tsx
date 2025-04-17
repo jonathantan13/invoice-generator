@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Button from "./Button";
 import Input from "./Input";
 import { Item } from "@/app/page";
@@ -16,7 +17,6 @@ export default function InputForm({ setItems }: setItems) {
   const [unitPrice, setUnitPrice] = useState(0);
 
   function resetForm() {
-    console.log("Reset form called");
     setName("");
     setItemName("");
     setQuantity(0);
@@ -27,7 +27,10 @@ export default function InputForm({ setItems }: setItems) {
     if (!name || !itemName || !quantity || !unitPrice)
       return console.log("Please do not leave anything out!");
 
+    const id = uuidv4();
+
     const item = {
+      id,
       name,
       itemName,
       quantity,

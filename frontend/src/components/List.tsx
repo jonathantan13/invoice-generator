@@ -3,6 +3,7 @@
 import ListItem from "./ListItem";
 
 interface Item {
+  id: string;
   name: string;
   itemName: string;
   quantity: number;
@@ -11,21 +12,22 @@ interface Item {
 
 interface ItemsListProps {
   itemsObj: Item[];
+  onRemoveItem: (id: string) => void;
 }
 
-export default function List({ itemsObj }: ItemsListProps) {
-  if (typeof window === "undefined") return null;
-
+export default function List({ itemsObj, onRemoveItem }: ItemsListProps) {
   return (
-    <form className="w-64 border">
+    <form className="w-96 border">
       <ul>
         {itemsObj.map((item, index) => (
           <ListItem
             key={index}
+            id={item.id}
             name={item.name}
             itemName={item.itemName}
             quantity={item.quantity}
             unitPrice={item.unitPrice}
+            onRemoveItem={onRemoveItem}
           />
         ))}
       </ul>
