@@ -4,7 +4,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Button from "./Button";
 import Input from "./Input";
-import { Item } from "@/app/page";
+import { Item } from "@/app/create-invoice/page";
 
 interface setItems {
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;

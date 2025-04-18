@@ -3,7 +3,7 @@
 import submitList from "@/actions";
 import ListItem from "./ListItem";
 import Button from "./Button";
-import { Item } from "@/app/page";
+import { Item } from "@/app/create-invoice/page";
 
 interface ItemsListProps {
   itemsObj: Item[];
