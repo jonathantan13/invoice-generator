@@ -1,6 +1,6 @@
 "use client";
 
-import submitForm from "@/actions";
+import submitList from "@/actions";
 import ListItem from "./ListItem";
 import Button from "./Button";
 import { Item } from "@/app/page";
@@ -19,26 +19,27 @@ export default function List({
   return (
     <form
       className="flex w-96 flex-col justify-between border"
-      action={submitForm}
+      action={submitList}
     >
       <ul>
         {itemsObj.map((item, index) => (
-          <>
-            <ListItem
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              itemName={item.itemName}
-              quantity={item.quantity}
-              unitPrice={item.unitPrice}
-              onRemoveItem={onRemoveItem}
-            />
-            <input
-              type="hidden"
-              name={`item-${index}`}
-              value={JSON.stringify(item)}
-            />
-          </>
+          <ListItem
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            itemName={item.itemName}
+            quantity={item.quantity}
+            unitPrice={item.unitPrice}
+            onRemoveItem={onRemoveItem}
+            input={
+              <input
+                key={index}
+                type="hidden"
+                name={`item-${index}`}
+                value={JSON.stringify(item)}
+              />
+            }
+          />
         ))}
       </ul>
       <div className="mx-auto flex w-[60%] justify-between">

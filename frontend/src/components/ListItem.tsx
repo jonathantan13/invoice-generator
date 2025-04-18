@@ -7,6 +7,7 @@ interface Item {
   quantity: number;
   unitPrice: number;
   onRemoveItem: (id: string) => void;
+  input: React.ReactElement;
 }
 
 export default function ListItem({
@@ -16,6 +17,7 @@ export default function ListItem({
   quantity,
   unitPrice,
   onRemoveItem,
+  input,
 }: Item) {
   return (
     <li className="flex justify-between border px-1 py-2">
@@ -29,6 +31,7 @@ export default function ListItem({
           <p>${unitPrice}</p>
         </div>
       </div>
+      {input}
       <button
         onClick={() => onRemoveItem(id)}
         type="button"

@@ -11,10 +11,10 @@ interface setItems {
 }
 
 export default function InputForm({ setItems }: setItems) {
-  const [name, setName] = useState("");
-  const [itemName, setItemName] = useState("");
-  const [quantity, setQuantity] = useState(0);
-  const [unitPrice, setUnitPrice] = useState(0);
+  const [name, setName] = useState("Hazy");
+  const [itemName, setItemName] = useState("Anime figure");
+  const [quantity, setQuantity] = useState(1);
+  const [unitPrice, setUnitPrice] = useState(10000);
 
   function resetForm() {
     setName("");
