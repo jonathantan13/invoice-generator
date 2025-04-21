@@ -11,7 +11,9 @@ export default async function Header() {
   return (
     <header className="mb-8 box-border bg-gray-700/20 px-4 py-4">
       <div className="mx-auto flex max-w-4xl items-center justify-between">
-        <Link href="/">Home</Link>
+        <Link href="/" className="font-bold">
+          Home
+        </Link>
         <Link href="/create-invoice">Create invoice</Link>
         <Link href="/invoices">Your invoices</Link>
         {!session?.user ? (

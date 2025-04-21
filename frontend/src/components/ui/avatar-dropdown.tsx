@@ -11,16 +11,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { User, LogOut } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export function AvatarDropdown() {
   const { data: session } = useSession();
 
   const handleVisitProfile = () => {
-    console.log("Visiting profile...");
-    // Add your profile navigation logic here
+    redirect("/"); // need to get user id
   };
-
-  // if (!session?.user?.image) return null;
 
   return (
     <DropdownMenu>
@@ -33,7 +31,7 @@ export function AvatarDropdown() {
             }
             alt={`${session?.user?.name}'s avatar`}
           />
-          <AvatarFallback></AvatarFallback>
+          <AvatarFallback>U</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
