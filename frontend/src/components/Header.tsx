@@ -1,8 +1,7 @@
 import { auth } from "@/auth";
 import signin from "@/actions/sign-in";
-import signout from "@/actions/sign-out";
 import Link from "next/link";
-import { Avatar, AvatarImage } from "@/ui/avatar";
+import { AvatarDropdown } from "./ui/avatar-dropdown";
 
 export default async function Header() {
   const session = await auth();
@@ -19,12 +18,7 @@ export default async function Header() {
         </form>
       ) : (
         <div className="flex flex-col items-end">
-          <Avatar>
-            <AvatarImage src={session.user.image} />
-          </Avatar>
-          <form action={signout}>
-            <button type="submit">Sign out</button>
-          </form>
+          <AvatarDropdown />
         </div>
       )}
     </header>
