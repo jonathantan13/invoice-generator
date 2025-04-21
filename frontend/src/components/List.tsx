@@ -1,6 +1,6 @@
 "use client";
 
-import submitList from "@/actions";
+import submitList from "@/actions/submit-list";
 import ListItem from "./ListItem";
 import Button from "./Button";
 import { ItemsListProps } from "@/interfaces";

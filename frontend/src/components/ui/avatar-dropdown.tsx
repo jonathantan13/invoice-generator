@@ -20,22 +20,25 @@ export function AvatarDropdown() {
     // Add your profile navigation logic here
   };
 
-  if (!session?.user?.image) return null;
+  // if (!session?.user?.image) return null;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer transition-opacity hover:opacity-80">
           <AvatarImage
-            src={session?.user?.image}
+            src={
+              session?.user?.image ??
+              "https://pbs.twimg.com/media/GbwV4DGWUBsEmuT.jpg"
+            }
             alt={`${session?.user?.name}'s avatar`}
           />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback></AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>
-          {session.user.name}&apos;s Account
+          {session?.user?.name}&apos;s Account
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem

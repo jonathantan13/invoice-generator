@@ -20,7 +20,7 @@ export default function RootLayout({
         <SessionProvider>
           <Toaster />
           <Header />
-          {children}
+          <div className="mx-auto max-w-5xl">{children}</div>
         </SessionProvider>
       </body>
     </html>

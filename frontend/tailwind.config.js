@@ -6,6 +6,9 @@ module.exports = {
   theme: {
     extend: {},
   },
+  images: {
+    domains: ["lh3.googleusercontent.com"],
+  },
   darkMode: "class",
   plugins: [heroui()],
 };

@@ -6,9 +6,11 @@ export default async function HomePage() {
 
   if (!session)
     return (
-      <div>
-        Welcome to the invoice generator! Sign in/sign up to start generating
-        invoices!
+      <div className="text-center">
+        <h2>
+          Welcome to the invoice generator! <button>Sign up</button> to start
+          generating invoices!
+        </h2>
       </div>
     );
   else {
