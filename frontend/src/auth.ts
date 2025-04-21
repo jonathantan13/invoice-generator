@@ -8,7 +8,12 @@ if (!GITHUB_CLIENT_ID || !GITHUB_CLIENT_SECRET) {
   throw new Error("Missing Google OAuth Credentials");
 }
 
-export const { handler, auth, signOut, signIn } = NextAuth({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signOut,
+  signIn,
+} = NextAuth({
   providers: [
     GoogleProvider({
       clientId: GITHUB_CLIENT_ID,
