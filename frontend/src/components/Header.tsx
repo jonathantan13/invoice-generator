@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import signin from "@/actions/sign-in";
 import signout from "@/actions/sign-out";
 import Link from "next/link";
-import { Avatar } from "@heroui/react";
+import { Avatar, AvatarImage } from "@/ui/avatar";
 
 export default async function Header() {
   const session = await auth();
@@ -10,7 +10,7 @@ export default async function Header() {
   if (session?.user?.image === null) return null;
 
   return (
-    <header className="flex justify-between">
+    <header className="mx-auto flex max-w-4xl items-center justify-between">
       <Link href="/">Home</Link>
       <Link href="/create-invoice">Create invoice</Link>
       {!session?.user ? (
@@ -19,7 +19,9 @@ export default async function Header() {
         </form>
       ) : (
         <div className="flex flex-col items-end">
-          <Avatar src={session.user.image} />
+          <Avatar>
+            <AvatarImage src={session.user.image} />
+          </Avatar>
           <form action={signout}>
             <button type="submit">Sign out</button>
           </form>
