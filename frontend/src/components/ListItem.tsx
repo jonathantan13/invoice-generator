@@ -1,14 +1,6 @@
 "use client";
 
-interface Item {
-  id: string;
-  name: string;
-  itemName: string;
-  quantity: number;
-  unitPrice: number;
-  onRemoveItem: (id: string) => void;
-  input: React.ReactElement;
-}
+import { Item } from "@/interfaces";
 
 export default function ListItem({
   id,
@@ -33,7 +25,9 @@ export default function ListItem({
       </div>
       {input}
       <button
-        onClick={() => onRemoveItem(id)}
+        onClick={() => {
+          if (onRemoveItem) onRemoveItem(id);
+        }}
         type="button"
         className="hover:cursor-pointer"
       >

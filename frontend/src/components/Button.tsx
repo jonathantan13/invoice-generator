@@ -1,11 +1,7 @@
 "use client";
 
+import { ButtonProps } from "@/interfaces";
 import React from "react";
-
-interface ButtonProps {
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  label: string;
-}
 
 export default function Button({ onClick, label }: ButtonProps) {
   if (label === "Submit") {

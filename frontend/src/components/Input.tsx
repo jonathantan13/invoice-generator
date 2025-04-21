@@ -1,12 +1,6 @@
 "use client";
 
-interface Input<T extends string | number> {
-  length: string;
-  label: string;
-  type: string;
-  input: T;
-  onChange: (value: T) => void;
-}
+import { InputComponent } from "@/interfaces";
 
 export default function Input<T extends string | number>({
   length = "w-[5rem]",
@@ -14,7 +8,7 @@ export default function Input<T extends string | number>({
   type,
   input,
   onChange,
-}: Input<T>) {
+}: InputComponent<T>) {
   return (
     <div className={`mb-4 flex max-w-2xl flex-col`}>
       <label htmlFor="">{label}</label>

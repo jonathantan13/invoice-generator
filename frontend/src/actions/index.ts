@@ -1,16 +1,9 @@
 "use server";
 
+import { Item } from "@/interfaces";
 import axios from "axios";
 
 const PORT = "http://localhost:8000";
-
-interface Item {
-  id: string;
-  name: string;
-  itemName: string;
-  quantity: number;
-  unitPrice: number;
-}
 
 export default async function submitList(formData: FormData) {
   const list: Item[] = [];

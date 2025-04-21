@@ -1,10 +1,13 @@
+import { auth } from "@/auth";
 import signin from "@/actions/sign-in";
 import signout from "@/actions/sign-out";
-import { auth } from "@/auth";
 import Link from "next/link";
+import { Avatar } from "@heroui/react";
 
 export default async function Header() {
   const session = await auth();
+
+  if (session?.user?.image === null) return null;
 
   return (
     <header className="flex justify-between">
@@ -16,13 +19,12 @@ export default async function Header() {
         </form>
       ) : (
         <div className="flex flex-col items-end">
-          <p>Welcome back, {session?.user.name}</p>
+          <Avatar src={session.user.image} />
           <form action={signout}>
             <button type="submit">Sign out</button>
           </form>
         </div>
       )}
-      {/* <Link href={`invoice/${id}`}>Your invoices</Link> */}
     </header>
   );
 }
