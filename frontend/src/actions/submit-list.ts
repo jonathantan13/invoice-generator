@@ -16,9 +16,8 @@ export default async function submitList(formData: FormData) {
       }
     }
   }
-  //It's ready to ship off to the API now
   if (list.length <= 0) return console.log("Cannot send off empty list");
-  // Should validation be done in the backend? Figure that out
+  // TODO: Should validation be done in the backend? Figure that out
 
   const res = await axios.post(`${PORT}/generate-invoice`, { invoice: list });
   const data = res.data;

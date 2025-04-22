@@ -12,13 +12,22 @@ export default async function Header() {
     <header className="mb-8 box-border bg-gray-700/20 px-4 py-4">
       <div className="mx-auto flex max-w-4xl items-center justify-between">
         <Link href="/" className="font-bold">
-          Home
+          HOME
         </Link>
-        <Link href="/create-invoice">Create invoice</Link>
-        <Link href="/invoices">Your invoices</Link>
+        <Link href="/create-invoice" className="hover:text-gray-600">
+          Create invoice
+        </Link>
+        <Link href="/invoices" className="hover:text-gray-600">
+          Your invoices
+        </Link>
         {!session?.user ? (
           <form action={signin}>
-            <button type="submit">Sign in</button>
+            <button
+              type="submit"
+              className="hover:cursor-pointer hover:text-gray-600"
+            >
+              Sign in
+            </button>
           </form>
         ) : (
           <AvatarDropdown />

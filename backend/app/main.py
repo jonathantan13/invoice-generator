@@ -3,8 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 
-import sqlalchemy
-
 app = FastAPI()
 
 class Item(BaseModel):
@@ -20,8 +18,8 @@ class Invoice(BaseModel):
 
 origins = [
     "http://localhost",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173"
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
 ]
 
 app.add_middleware(
