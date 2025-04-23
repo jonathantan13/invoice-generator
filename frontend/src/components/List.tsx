@@ -27,15 +27,16 @@ export default function List({
   );
 
   if (submission.status === "failed") {
-    toast.error("Cannot submit empty invoice!", {
+    toast.error(submission.message, {
       duration: 3000,
     });
   }
 
   if (submission.status === "success") {
-    toast.success("Invoice has been successfully submitted!", {
+    toast.success(submission.message, {
       duration: 3000,
     });
+    setItems([]);
   }
 
   return (
@@ -71,7 +72,6 @@ export default function List({
           disabled={isSubmitting}
         >
           {isSubmitting ? "Submitting" : "Submit"}
-          Submit
         </button>
         <button onClick={() => setItems([])} type="reset">
           Clear

@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-// import { SupabaseAdapter } from "@auth/supabase-adapter";
+import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -21,10 +21,10 @@ export const {
   signOut,
   signIn,
 } = NextAuth({
-  // adapter: SupabaseAdapter({
-  //   url: SUPABASE_URL,
-  //   secret: SUPABASE_SERVICE_ROLE_KEY,
-  // }),
+  adapter: SupabaseAdapter({
+    url: SUPABASE_URL,
+    secret: SUPABASE_SERVICE_ROLE_KEY,
+  }),
   providers: [
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,

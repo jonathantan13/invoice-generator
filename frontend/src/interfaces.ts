@@ -28,5 +28,5 @@ export interface InputComponent<T extends string | number> {
 }
 
 export interface InvoiceProps {
-  params: { invoiceId: string };
+  params: Promise<{ invoiceId: string }>;
 }

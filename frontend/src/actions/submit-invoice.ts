@@ -1,33 +1,40 @@
 "use server";
 
+import supabase from "@/db";
 import { Item } from "@/interfaces";
-
-// const PORT = "http://localhost:8000";
 
 export default async function submitInvoiceAction(
   _prevState: { status: string; message: string },
   formData: FormData,
 ) {
-  const list: Item[] = [];
+  const invoice: Item[] = [];
 
   for (const [key, value] of formData.entries()) {
     if (key.startsWith("item-")) {
       if (typeof value == "string") {
         const obj = JSON.parse(value);
-        list.push(obj);
+        invoice.push(obj);
       }
     }
   }
 
-  console.log(_prevState);
-
-  if (list.length <= 0) {
+  if (invoice.length <= 0) {
     return { status: "failed", message: "You cannot submit an empty invoice!" };
   }
 
-  // const res = await axios.post(`${PORT}/generate-invoice`, { invoice: list });
-  // const data = res.data;
-  // Replace with supabase post request
+  const { _, error } = await supabase
+    .from("invoice")
+    .insert([{ invoice_obj: invoice }])
+    .select();
+
+  // TODO: Find a way to automatically get the user_id from sessions
+
+  if (error) {
+    return {
+      status: "failed",
+      message: JSON.stringify(error),
+    };
+  }
 
   return {
     status: "success",
