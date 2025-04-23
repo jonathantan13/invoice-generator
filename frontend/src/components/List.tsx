@@ -4,7 +4,7 @@ import submitInvoiceAction from "@/actions/submit-invoice";
 import ListItem from "./ListItem";
 // import Button from "./Button";
 import { ItemsListProps } from "@/interfaces";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function List({
@@ -12,32 +12,25 @@ export default function List({
   onRemoveItem,
   setItems,
 }: ItemsListProps) {
-  // TODO
-  // Why does it re-render 4 times? The reset button seems to also trigger a re-render.
-
-  // 1. We seem to be hitting the auth api route, that causes 2 re-renders.
-  // That may also be why the reset button causes a re-render. I'll have
-  // to separate the auth process from the header.
-
-  //2. The button label/isSubmitting also seems to cause a re-render.
-
   const [submission, submitInvoice, isSubmitting] = useActionState(
     submitInvoiceAction,
     { status: "", message: "" },
   );
 
-  if (submission.status === "failed") {
-    toast.error(submission.message, {
-      duration: 3000,
-    });
-  }
+  useEffect(() => {
+    if (submission.status === "failed") {
+      toast.error(submission.message, {
+        duration: 3000,
+      });
+    }
 
-  if (submission.status === "success") {
-    toast.success(submission.message, {
-      duration: 3000,
-    });
-    setItems([]);
-  }
+    if (submission.status === "success") {
+      toast.success(submission.message, {
+        duration: 3000,
+      });
+      setItems([]);
+    }
+  }, [submission, setItems]);
 
   return (
     <form
