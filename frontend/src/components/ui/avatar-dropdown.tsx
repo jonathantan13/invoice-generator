@@ -9,16 +9,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { User, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 export function AvatarDropdown() {
   const { data: session } = useSession();
-
-  const handleVisitProfile = () => {
-    redirect("/"); // need to get user id
-  };
 
   return (
     <DropdownMenu>
@@ -40,13 +35,12 @@ export function AvatarDropdown() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={handleVisitProfile}
+          onClick={() => {
+            signOut();
+            // TODO: Redirects don't work in client components, find another way
+          }}
           className="cursor-pointer"
         >
-          <User className="mr-2 h-4 w-4" />
-          <span>Profile</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
           <span>Sign out</span>
         </DropdownMenuItem>

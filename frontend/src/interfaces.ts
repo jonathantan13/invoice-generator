@@ -26,3 +26,7 @@ export interface InputComponent<T extends string | number> {
   input: T;
   onChange: (value: T) => void;
 }
+
+export interface InvoiceProps {
+  params: { invoiceId: string };
+}

@@ -18,7 +18,7 @@ export const {
   signOut,
   signIn,
 } = NextAuth({
-  adapter: PGAdapter(pool),
+  // adapter: PGAdapter(pool),
   providers: [
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,
@@ -26,7 +26,7 @@ export const {
     }),
   ],
   session: {
-    strategy: "database",
+    // strategy: "database",
     maxAge: 60 * 15,
   },
 });
