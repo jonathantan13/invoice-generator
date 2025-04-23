@@ -18,6 +18,9 @@ export default async function submitInvoiceAction(
       }
     }
   }
+
+  console.log(_prevState);
+
   if (list.length <= 0) {
     return { status: "failed", message: "You cannot submit an empty invoice!" };
   }

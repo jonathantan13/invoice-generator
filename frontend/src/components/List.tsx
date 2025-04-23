@@ -12,11 +12,14 @@ export default function List({
   onRemoveItem,
   setItems,
 }: ItemsListProps) {
-  // Form is submitted via server action, the formData gets passed in.
-  // I want the server action to send back a success or failed status, so
-  // I can implement a toast accordingly.
+  // TODO
+  // Why does it re-render 4 times? The reset button seems to also trigger a re-render.
 
-  // Why does it re-render 4 times? The reset button seems to also trigger a response.
+  // 1. We seem to be hitting the auth api route, that causes 2 re-renders.
+  // That may also be why the reset button causes a re-render. I'll have
+  // to separate the auth process from the header.
+
+  //2. The button label/isSubmitting also seems to cause a re-render.
 
   const [submission, submitInvoice, isSubmitting] = useActionState(
     submitInvoiceAction,
@@ -68,6 +71,7 @@ export default function List({
           disabled={isSubmitting}
         >
           {isSubmitting ? "Submitting" : "Submit"}
+          Submit
         </button>
         <button onClick={() => setItems([])} type="reset">
           Clear
