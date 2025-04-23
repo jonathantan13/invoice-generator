@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "@/auth";
 import supabase from "@/db";
 import { Item } from "@/interfaces";
 
@@ -8,6 +9,7 @@ export default async function submitInvoiceAction(
   formData: FormData,
 ) {
   const invoice: Item[] = [];
+  const session = await auth();
 
   for (const [key, value] of formData.entries()) {
     if (key.startsWith("item-")) {
@@ -22,12 +24,17 @@ export default async function submitInvoiceAction(
     return { status: "failed", message: "You cannot submit an empty invoice!" };
   }
 
+  if (!session) {
+    return {
+      status: "failed",
+      message: "You must be authenticated to send an invoice!",
+    };
+  }
+
   const { _, error } = await supabase
     .from("invoice")
-    .insert([{ invoice_obj: invoice }])
+    .insert([{ invoice_obj: invoice, user_id: session.user?.id }])
     .select();
-
-  // TODO: Find a way to automatically get the user_id from sessions
 
   if (error) {
     return {
