@@ -1,6 +1,6 @@
 "use client";
 
-import submitList from "@/actions/submit-list";
+import submitInvoice from "@/actions/submit-invoice";
 import ListItem from "./ListItem";
 import Button from "./Button";
 import { ItemsListProps } from "@/interfaces";
@@ -13,7 +13,7 @@ export default function List({
   return (
     <form
       className="flex w-96 flex-col justify-between border"
-      action={submitList}
+      action={submitInvoice}
     >
       <ul>
         {itemsObj.map((item, index) => (

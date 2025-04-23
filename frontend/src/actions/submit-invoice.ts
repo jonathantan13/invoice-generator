@@ -3,9 +3,9 @@
 import { Item } from "@/interfaces";
 import axios from "axios";
 
-const PORT = "http://localhost:8000";
+const PORT = "http://localhost:8000"; // FastAPI port
 
-export default async function submitList(formData: FormData) {
+export default async function submitInvoice(formData: FormData) {
   const list: Item[] = [];
 
   for (const [key, value] of formData.entries()) {
