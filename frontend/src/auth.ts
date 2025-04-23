@@ -1,16 +1,19 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import PGAdapter from "@auth/pg-adapter";
-import { Pool } from "pg";
+// import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
   throw new Error("Missing Google OAuth Credentials");
 }
 
-const pool = new Pool(); // TODO: Deal with this after setting up Heroku
+if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+  throw new Error("Missing Supabase Credentials");
+}
 
 export const {
   handlers: { GET, POST },
@@ -18,7 +21,10 @@ export const {
   signOut,
   signIn,
 } = NextAuth({
-  // adapter: PGAdapter(pool),
+  // adapter: SupabaseAdapter({
+  //   url: SUPABASE_URL,
+  //   secret: SUPABASE_SERVICE_ROLE_KEY,
+  // }),
   providers: [
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,
@@ -26,7 +32,6 @@ export const {
     }),
   ],
   session: {
-    // strategy: "database",
     maxAge: 60 * 15,
   },
 });

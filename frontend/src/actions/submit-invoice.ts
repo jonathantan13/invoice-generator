@@ -1,11 +1,13 @@
 "use server";
 
 import { Item } from "@/interfaces";
-import axios from "axios";
 
-const PORT = "http://localhost:8000"; // FastAPI port
+// const PORT = "http://localhost:8000";
 
-export default async function submitInvoice(formData: FormData) {
+export default async function submitInvoiceAction(
+  _prevState: { status: string; message: string },
+  formData: FormData,
+) {
   const list: Item[] = [];
 
   for (const [key, value] of formData.entries()) {
@@ -16,11 +18,16 @@ export default async function submitInvoice(formData: FormData) {
       }
     }
   }
-  if (list.length <= 0) return console.log("Cannot send off empty list");
-  // TODO: Should validation be done in the backend? Figure that out
+  if (list.length <= 0) {
+    return { status: "failed", message: "You cannot submit an empty invoice!" };
+  }
 
-  const res = await axios.post(`${PORT}/generate-invoice`, { invoice: list });
-  const data = res.data;
+  // const res = await axios.post(`${PORT}/generate-invoice`, { invoice: list });
+  // const data = res.data;
+  // Replace with supabase post request
 
-  console.log(data);
+  return {
+    status: "success",
+    message: "Invoice has been successfully submitted!",
+  };
 }
