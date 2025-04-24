@@ -31,9 +31,9 @@ export const {
       clientSecret: GOOGLE_CLIENT_SECRET,
     }),
   ],
-  session: {
-    maxAge: 60 * 15,
-  },
+  // session: {
+  //   maxAge: 60 * 15,
+  // },
 });
 
 // TODO: fix strict-origin-when-cross-origin when fetching user's profile picture
