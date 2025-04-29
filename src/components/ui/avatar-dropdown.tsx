@@ -9,21 +9,40 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { createClient } from "@/utils/supabase/client";
 import { LogOut } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export function AvatarDropdown() {
+  const supabase = createClient();
+  const [profileImg, setProfileImg] = useState(
+    "https://pbs.twimg.com/media/GbwV4DGWUBsEmuT.jpg",
+  );
   const { data: session } = useSession();
+
+  // useEffect(() => {
+  //   async function fetchProfilePicture() {
+  //     const { data, error } = await supabase
+  //       .schema("next_auth")
+  //       .from("users")
+  //       .select("image")
+  //       .eq("id", session?.user?.id);
+  //     console.log(typeof data);
+  //     if (!error) {
+  //       setProfileImg(data);
+  //     }
+  //   }
+
+  //   fetchProfilePicture();
+  // }, [supabase, session?.user?.id]);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer transition-opacity hover:opacity-80">
           <AvatarImage
-            src={
-              session?.user?.image ??
-              "https://pbs.twimg.com/media/GbwV4DGWUBsEmuT.jpg"
-            }
+            src={session?.user?.image ?? profileImg}
             alt={`${session?.user?.name}'s avatar`}
           />
           <AvatarFallback>U</AvatarFallback>

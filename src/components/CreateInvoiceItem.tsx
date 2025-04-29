@@ -1,6 +1,6 @@
 export default function CreateInvoiceItem() {
   return (
-    <div className="grid grid-cols-4">
+    <div className="grid grid-cols-4 gap-4">
       <h2>Items</h2>
       <h2>Quantity</h2>
       <h2>Unit Price</h2>
