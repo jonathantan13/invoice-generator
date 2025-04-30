@@ -1,16 +1,20 @@
 "use client";
 
 import submitInvoiceAction from "@/actions/submit-invoice";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import CreateInvoiceItem from "./CreateInvoiceItem";
 
 export default function CreateInvoice() {
+  const [itemQuantity, setItemQuantity] = useState(1);
   const [submission, action] = useActionState(submitInvoiceAction, {
     status: "",
     message: "",
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (submission.status === "failed") {
+    }
+  }, [submission]);
 
   return (
     <form
@@ -18,60 +22,82 @@ export default function CreateInvoice() {
       className="grid grid-cols-4 gap-4 rounded-[8px] bg-gray-200 p-6"
     >
       <h1 className="text-3xl font-bold">INVOICE</h1>
-      <div className="col-start-4 h-48 border">
-        <div className="h-[75%] text-center">
-          <h2>Choose your logo</h2>
-        </div>
-        <input type="file" name="logo" accept="image/*" className="items-end" />
-      </div>
+      <label
+        htmlFor="upload-img"
+        className="col-start-4 h-48 border border-gray-800 text-center"
+      >
+        Add your logo
+      </label>
+      <input
+        id="upload-img"
+        type="file"
+        name="logo"
+        accept="image/*"
+        className="hidden"
+      />
       <input
         type="text"
         name="company-name"
-        placeholder="Your company name..."
-        className="border"
+        placeholder="Your company name"
+        className="box-border border border-gray-800 px-2"
       />
       <input
         type="text"
         name="customer-name"
-        placeholder="Who are you billing to"
-        className="col-start-4 border"
+        placeholder="Who you are billing to"
+        className="col-start-4 box-border border border-gray-800 px-2"
       />
       <textarea
         name="company-address"
         placeholder="Your company address"
-        className="border"
+        className="box-border h-28 resize-none border border-gray-800 px-2"
       />
       <textarea
         name="customer-address"
         placeholder="Customer address"
-        className="col-start-4 border"
+        className="col-start-4 box-border resize-none border border-gray-800 px-2"
       />
-      <div className="col-span-2 row-span-2 flex flex-col">
+      <div className="col-span-2 row-span-2 flex flex-col gap-2">
         <div className="flex flex-row">
           <label htmlFor="" className="w-32">
             Invoice No. :
           </label>
-          <input type="text" />
+          <input
+            type="text"
+            className="border-box border border-gray-800 px-1"
+          />
         </div>
         <div className="flex flex-row">
           <label htmlFor="" className="w-32">
             Invoice Date:
           </label>
-          <input type="text" />
+          <input
+            type="text"
+            className="border-box border border-gray-800 px-1"
+          />
         </div>
       </div>
       <div className="col-span-full col-start-1">
-        <CreateInvoiceItem />
+        <div className="grid grid-cols-4 gap-4">
+          <h2>Items</h2>
+          <h2>Quantity</h2>
+          <h2>Unit Price</h2>
+          <h2>Total Price</h2>
+          <CreateInvoiceItem />
+        </div>
       </div>
       <hr className="col-span-full" />
       <div className="col-start-4 flex flex-row gap-3">
         <label htmlFor="">Subtotal:</label>
-        <input type="text" className="border" disabled />
+        <input type="text" className="border border-gray-800" disabled />
       </div>
-      <textarea placeholder="Other information" className="h-48 border" />
+      <textarea
+        placeholder="Other information"
+        className="border-box h-48 resize-none border border-gray-800 px-2"
+      />
       <textarea
         placeholder="Bank Information (Optional)"
-        className="h-48 border"
+        className="border-box h-48 resize-none border border-gray-800 px-2"
       />
     </form>
   );
