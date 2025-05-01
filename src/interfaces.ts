@@ -30,3 +30,11 @@ export interface InputComponent<T extends string | number> {
 export interface InvoiceProps {
   params: Promise<{ invoiceId: string }>;
 }
+
+export interface InvoiceItem {
+  id: number;
+  description: string;
+  quantity: number;
+  unitPrice: string;
+  updateItem: (id: number, field: string, value: string | number) => void;
+}

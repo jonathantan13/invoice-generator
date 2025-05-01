@@ -5,7 +5,9 @@ import { useActionState, useEffect, useState } from "react";
 import CreateInvoiceItem from "./CreateInvoiceItem";
 
 export default function CreateInvoice() {
-  const [itemQuantity, setItemQuantity] = useState(1);
+  const [invoiceItems, setInvoiceItems] = useState([
+    { id: 1, description: "", quantity: 1, unitPrice: "" },
+  ]);
   const [submission, action] = useActionState(submitInvoiceAction, {
     status: "",
     message: "",
@@ -15,6 +17,22 @@ export default function CreateInvoice() {
     if (submission.status === "failed") {
     }
   }, [submission]);
+
+  function addInvoiceItem() {}
+
+  function removeInvoiceItem(id: string) {}
+
+  function updateInvoiceItem(
+    id: number,
+    field: string,
+    value: string | number,
+  ) {
+    setInvoiceItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, [field]: value } : item,
+      ),
+    );
+  }
 
   return (
     <form
@@ -78,18 +96,25 @@ export default function CreateInvoice() {
         </div>
       </div>
       <div className="col-span-full col-start-1">
-        <div className="mb-2 grid grid-cols-4 gap-4">
+        <div className="mb-2 box-border grid grid-cols-4 gap-4 bg-blue-500 px-2 py-2">
           <h2>Items</h2>
           <h2>Quantity</h2>
           <h2>Unit Price</h2>
           <h2>Total Price</h2>
-          {Array.from({ length: itemQuantity }, (_, index) => (
-            <CreateInvoiceItem key={index} />
-          ))}
         </div>
-        <button onClick={() => setItemQuantity((i) => (i += 1))}>
+        {invoiceItems.map((item) => (
+          <CreateInvoiceItem
+            key={item.id}
+            id={item.id}
+            description={item.description}
+            quantity={item.quantity}
+            unitPrice={item.unitPrice}
+            updateItem={updateInvoiceItem}
+          />
+        ))}
+        {/* <button onClick={() => setItemQuantity((i) => (i += 1))}>
           Add item
-        </button>
+        </button> */}
       </div>
       <hr className="col-span-full" />
       <div className="col-start-4 flex flex-row gap-3">
