@@ -24,7 +24,7 @@ export default function CreateInvoice() {
       <h1 className="text-3xl font-bold">INVOICE</h1>
       <label
         htmlFor="upload-img"
-        className="col-start-4 h-48 border border-gray-800 text-center"
+        className="col-start-4 h-48 border border-gray-800 text-center text-2xl"
       >
         Add your logo
       </label>
@@ -78,13 +78,18 @@ export default function CreateInvoice() {
         </div>
       </div>
       <div className="col-span-full col-start-1">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="mb-2 grid grid-cols-4 gap-4">
           <h2>Items</h2>
           <h2>Quantity</h2>
           <h2>Unit Price</h2>
           <h2>Total Price</h2>
-          <CreateInvoiceItem />
+          {Array.from({ length: itemQuantity }, (_, index) => (
+            <CreateInvoiceItem key={index} />
+          ))}
         </div>
+        <button onClick={() => setItemQuantity((i) => (i += 1))}>
+          Add item
+        </button>
       </div>
       <hr className="col-span-full" />
       <div className="col-start-4 flex flex-row gap-3">
