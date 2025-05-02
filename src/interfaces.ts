@@ -32,9 +32,9 @@ export interface InvoiceProps {
 }
 
 export interface InvoiceItem {
-  id: number;
+  id: string;
   description: string;
   quantity: number;
   unitPrice: string;
-  updateItem: (id: number, field: string, value: string | number) => void;
+  updateItem: (id: string, field: string, value: string | number) => void;
 }

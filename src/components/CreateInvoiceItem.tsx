@@ -10,7 +10,7 @@ export default function CreateInvoiceItem({
   const totalPrice = quantity * Number(unitPrice);
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="mb-2 grid grid-cols-4 gap-4">
       <input
         name=""
         type="text"
