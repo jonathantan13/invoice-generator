@@ -36,5 +36,9 @@ export interface InvoiceItem {
   description: string;
   quantity: number;
   unitPrice: string;
-  updateItem: (id: string, field: string, value: string | number) => void;
+  updateItem?: (id: string, field: string, value: string | number) => void;
+}
+
+export interface InvoiceItems {
+  invoiceItems: InvoiceItem[];
 }

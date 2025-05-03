@@ -1,13 +1,13 @@
 "use client";
 
 import submitInvoiceAction from "@/actions/submit-invoice";
-import { useActionState, useEffect, useState } from "react";
 import CreateInvoiceItem from "./CreateInvoiceItem";
 import FormUploadLogo from "./FormUploadLogo";
 import FormBilling from "./FormBilling";
 import FormInvoiceTracking from "./FormInvoiceTracking";
 import FormAdditionalAndBank from "./FormAdditional";
 import FormSubtotal from "./FormSubtotal";
+import { useActionState, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function CreateInvoice() {
@@ -76,7 +76,7 @@ export default function CreateInvoice() {
         <button onClick={addInvoiceItem}>Add item</button>
       </div>
       <hr className="col-span-full" />
-      <FormSubtotal />
+      <FormSubtotal invoiceItems={invoiceItems} />
       <FormAdditionalAndBank />
     </form>
   );
