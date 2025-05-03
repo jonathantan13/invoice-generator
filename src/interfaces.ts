@@ -37,6 +37,7 @@ export interface InvoiceItem {
   quantity: number;
   unitPrice: string;
   updateItem?: (id: string, field: string, value: string | number) => void;
+  onRemove?: (id: string) => void;
 }
 
 export interface InvoiceItems {

@@ -6,13 +6,14 @@ export default function CreateInvoiceItem({
   quantity,
   unitPrice,
   updateItem,
+  onRemove,
 }: InvoiceItem) {
   const totalPrice = quantity * Number(unitPrice);
 
-  if (!updateItem) return null;
+  if (!updateItem || !onRemove) return null;
 
   return (
-    <div className="mb-2 grid grid-cols-4 gap-4">
+    <div className="box-border grid grid-cols-[15fr_2fr_2fr_2fr_1fr] gap-2 px-2 py-2">
       <input
         name=""
         type="text"
@@ -48,6 +49,9 @@ export default function CreateInvoiceItem({
         disabled
         value={totalPrice || 0}
       />
+      <button onClick={() => onRemove(id)} className="hover:cursor-pointer">
+        ❌
+      </button>
     </div>
   );
 }
