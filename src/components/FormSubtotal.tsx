@@ -11,8 +11,9 @@ export default function FormSubtotal({ invoiceItems }: InvoiceItems) {
       <label>Subtotal:</label>
       <input
         type="text"
+        name="subtotal"
         className="box-border w-full border border-gray-800 pl-2"
-        disabled
+        readOnly
         value={`$${totalPrice}`}
       />
     </div>

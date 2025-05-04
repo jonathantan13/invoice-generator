@@ -65,10 +65,11 @@ export default function CreateInvoice() {
           <h2>Unit Price</h2>
           <h2>Total Price</h2>
         </div>
-        {invoiceItems.map((item) => (
+        {invoiceItems.map((item, index) => (
           <CreateInvoiceItem
             key={item.id}
             id={item.id}
+            index={index}
             description={item.description}
             quantity={item.quantity}
             unitPrice={item.unitPrice}
@@ -83,6 +84,7 @@ export default function CreateInvoice() {
       <hr className="col-span-full" />
       <FormSubtotal invoiceItems={invoiceItems} />
       <FormAdditionalAndBank />
+      <button type="submit">Submit</button>
     </form>
   );
 }

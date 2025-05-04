@@ -3,6 +3,7 @@ import { InvoiceItem } from "@/interfaces";
 export default function CreateInvoiceItem({
   id,
   description,
+  index,
   quantity,
   unitPrice,
   updateItem,
@@ -15,7 +16,7 @@ export default function CreateInvoiceItem({
   return (
     <div className="box-border grid grid-cols-[15fr_2fr_2fr_2fr_1fr] gap-2 px-2 py-2">
       <input
-        name=""
+        name={`item-description-${index}`}
         type="text"
         placeholder="Item Description"
         className="border-box border border-gray-800 px-2"
@@ -23,6 +24,7 @@ export default function CreateInvoiceItem({
         onChange={(e) => updateItem(id, "description", e.target.value)}
       />
       <input
+        name={`item-quantity-${index}`}
         type="number"
         placeholder="Quantity"
         className="border-box border border-gray-800 px-2"
@@ -36,6 +38,7 @@ export default function CreateInvoiceItem({
         }
       />
       <input
+        name={`item-unit-price-${index}`}
         type="text"
         placeholder="Unit Price"
         className="border-box border border-gray-800 px-2"
@@ -49,11 +52,12 @@ export default function CreateInvoiceItem({
         }
       />
       <input
+        name={`item-total-price-${index}`}
         type="text"
         placeholder="Total price"
         className="border-box border border-gray-800 px-2"
-        disabled
         value={totalPrice || 0}
+        readOnly
       />
       <button onClick={() => onRemove(id)} className="hover:cursor-pointer">
         ❌

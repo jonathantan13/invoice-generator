@@ -11,14 +11,31 @@ export default async function submitInvoiceAction(
   const invoice: Item[] = [];
   const session = await auth();
 
-  for (const [key, value] of formData.entries()) {
-    if (key.startsWith("item-")) {
-      if (typeof value == "string") {
-        const obj = JSON.parse(value);
-        invoice.push(obj);
-      }
-    }
-  }
+  // formData object
+  /*
+    logo: File {
+      size: 0,
+      type: 'application/octet-stream',
+      name: 'undefined',
+      lastModified: 1746355499403
+    },
+    'company-name': '',
+    'customer-name': '',
+    'company-address': '',
+    'customer-address': '',
+    'item-description-0': '',
+    'item-quantity-0': '1',
+    'item-unit-price-0': '',
+    'item-total-price-0': '0',
+    'item-description-1': '',
+    'item-quantity-1': '1',
+    'item-unit-price-1': '',
+    'item-total-price-1': '0',
+    subtotal: '$0',
+    'other-info': '',
+    'bank-info': ''
+  */
+  console.log(formData);
 
   if (invoice.length <= 0) {
     return { status: "failed", message: "You cannot submit an empty invoice!" };

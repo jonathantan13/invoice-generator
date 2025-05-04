@@ -34,6 +34,7 @@ export interface InvoiceProps {
 export interface InvoiceItem {
   id: string;
   description: string;
+  index?: number;
   quantity: number;
   unitPrice: string;
   updateItem?: (id: string, field: string, value: string | number) => void;

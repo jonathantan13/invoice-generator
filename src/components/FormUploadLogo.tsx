@@ -20,7 +20,7 @@ export default function FormUploadLogo() {
 
   return (
     <>
-      <div className="relative col-start-4 h-56 text-center text-2xl">
+      <div className="relative col-start-4 h-56 text-center text-2xl hover:cursor-pointer">
         {image ? (
           <>
             <Image src={image} alt="user's profile picture" fill />
@@ -41,7 +41,7 @@ export default function FormUploadLogo() {
         name="logo"
         accept="image/*"
         className="hidden"
-        onChange={showImage}
+        onChange={(e) => showImage(e)}
       />
     </>
   );
