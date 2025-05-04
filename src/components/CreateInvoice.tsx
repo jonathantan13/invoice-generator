@@ -59,7 +59,7 @@ export default function CreateInvoice() {
       <FormBilling />
       <FormInvoiceTracking />
       <div className="col-span-full col-start-1">
-        <div className="mb-2 box-border grid grid-cols-[6fr_3fr_3fr_3fr_1fr] gap-4 bg-blue-500 px-2 py-2">
+        <div className="mb-2 box-border grid grid-cols-[6.5fr_3.5fr_3.5fr_3fr_1fr] gap-4 bg-blue-500 px-2 py-2">
           <h2>Items</h2>
           <h2>Quantity</h2>
           <h2>Unit Price</h2>

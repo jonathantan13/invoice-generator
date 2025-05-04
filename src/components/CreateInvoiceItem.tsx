@@ -40,7 +40,13 @@ export default function CreateInvoiceItem({
         placeholder="Unit Price"
         className="border-box border border-gray-800 px-2"
         value={unitPrice}
-        onChange={(e) => updateItem(id, "unitPrice", e.target.value)}
+        onChange={(e) =>
+          updateItem(
+            id,
+            "unitPrice",
+            typeof Number(e.target.value) === "number" ? e.target.value : "",
+          )
+        }
       />
       <input
         type="text"
