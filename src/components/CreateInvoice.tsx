@@ -34,7 +34,7 @@ export default function CreateInvoice() {
   }
 
   function removeInvoiceItem(id: string) {
-    setInvoiceItems((items) => items.filter((item) => item.id === id));
+    setInvoiceItems((items) => items.filter((item) => item.id !== id));
   }
 
   function updateInvoiceItem(
