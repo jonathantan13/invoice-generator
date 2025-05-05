@@ -41,6 +41,9 @@ export interface InvoiceItem {
   onRemove?: (id: string) => void;
 }
 
-export interface InvoiceItems {
-  invoiceItems: InvoiceItem[];
+export type InvoiceItems = InvoiceItem[];
+
+export interface CreateInvoiceItemsProps {
+  invoiceItems: InvoiceItems;
+  setInvoiceItems: React.Dispatch<React.SetStateAction<InvoiceItems>>;
 }

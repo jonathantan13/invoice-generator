@@ -1,6 +1,8 @@
-import { InvoiceItems } from "@/interfaces";
+import { CreateInvoiceItemsProps } from "@/interfaces";
 
-export default function FormSubtotal({ invoiceItems }: InvoiceItems) {
+export default function FormSubtotal({
+  invoiceItems,
+}: CreateInvoiceItemsProps) {
   const totalPrice = invoiceItems.reduce(
     (acc, cur) => acc + Number(cur.unitPrice) * cur.quantity,
     0,

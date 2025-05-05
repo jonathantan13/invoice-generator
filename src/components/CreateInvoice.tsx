@@ -1,17 +1,18 @@
 "use client";
 
 import submitInvoiceAction from "@/actions/submit-invoice";
-import CreateInvoiceItem from "./CreateInvoiceItem";
 import FormUploadLogo from "./FormUploadLogo";
 import FormBilling from "./FormBilling";
 import FormInvoiceTracking from "./FormInvoiceTracking";
 import FormAdditionalAndBank from "./FormAdditional";
 import FormSubtotal from "./FormSubtotal";
 import { useActionState, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import toast from "react-hot-toast";
+import CreateInvoiceItems from "./CreateInvoiceItems";
+import { InvoiceItems } from "@/interfaces";
 
 export default function CreateInvoice() {
-  const [invoiceItems, setInvoiceItems] = useState([
+  const [invoiceItems, setInvoiceItems] = useState<InvoiceItems>([
     { id: "123456789", description: "", quantity: 1, unitPrice: "" },
   ]);
   const [submission, action] = useActionState(submitInvoiceAction, {
@@ -21,33 +22,16 @@ export default function CreateInvoice() {
 
   useEffect(() => {
     if (submission.status === "failed") {
+      toast.error(submission.message, {
+        duration: 4000,
+      });
+    }
+    if (submission.status === "success") {
+      toast.success(submission.message, {
+        duration: 3000,
+      });
     }
   }, [submission]);
-
-  function addInvoiceItem() {
-    const id = uuidv4();
-
-    setInvoiceItems((items) => [
-      ...items,
-      { id, description: "", quantity: 1, unitPrice: "" },
-    ]);
-  }
-
-  function removeInvoiceItem(id: string) {
-    setInvoiceItems((items) => items.filter((item) => item.id !== id));
-  }
-
-  function updateInvoiceItem(
-    id: string,
-    field: string,
-    value: string | number,
-  ) {
-    setInvoiceItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, [field]: value } : item,
-      ),
-    );
-  }
 
   return (
     <form
@@ -58,7 +42,11 @@ export default function CreateInvoice() {
       <FormUploadLogo />
       <FormBilling />
       <FormInvoiceTracking />
-      <div className="col-span-full col-start-1">
+      <CreateInvoiceItems
+        invoiceItems={invoiceItems}
+        setInvoiceItems={setInvoiceItems}
+      />
+      {/* <div className="col-span-full col-start-1">
         <div className="mb-2 box-border grid grid-cols-[6.5fr_3.5fr_3.5fr_3fr_1fr] gap-4 bg-blue-500 px-2 py-2">
           <h2>Items</h2>
           <h2>Quantity</h2>
@@ -80,9 +68,12 @@ export default function CreateInvoice() {
         <button onClick={addInvoiceItem} className="ml-2">
           Add item
         </button>
-      </div>
+      </div> */}
       <hr className="col-span-full" />
-      <FormSubtotal invoiceItems={invoiceItems} />
+      <FormSubtotal
+        invoiceItems={invoiceItems}
+        setInvoiceItems={setInvoiceItems}
+      />
       <FormAdditionalAndBank />
       <button type="submit">Submit</button>
     </form>
