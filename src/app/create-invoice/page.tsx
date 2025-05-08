@@ -1,7 +1,12 @@
 import { auth } from "@/auth";
 import CreateInvoice from "@/components/CreateInvoice";
+import { Metadata } from "next";
 
-export default async function Home() {
+export const metadata: Metadata = {
+  title: "Create Invoice",
+};
+
+export default async function CreateInvoicePage() {
   const session = await auth();
 
   if (!session)

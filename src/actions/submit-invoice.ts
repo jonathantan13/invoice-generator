@@ -37,6 +37,10 @@ export default async function submitInvoiceAction(
   */
   console.log(formData);
 
+  const logo = formData.get("logo");
+
+  console.log(logo);
+
   if (invoice.length <= 0) {
     return { status: "failed", message: "You cannot submit an empty invoice!" };
   }
@@ -48,17 +52,17 @@ export default async function submitInvoiceAction(
     };
   }
 
-  const { _, error } = await supabase
-    .from("invoice")
-    .insert([{ invoice_obj: invoice, user_id: session.user?.id }])
-    .select();
+  // const { _, error } = await supabase
+  //   .from("invoice")
+  //   .insert([{ invoice_obj: invoice, user_id: session.user?.id }])
+  //   .select();
 
-  if (error) {
-    return {
-      status: "failed",
-      message: JSON.stringify(error),
-    };
-  }
+  // if (error) {
+  //   return {
+  //     status: "failed",
+  //     message: JSON.stringify(error),
+  //   };
+  // }
 
   return {
     status: "success",
