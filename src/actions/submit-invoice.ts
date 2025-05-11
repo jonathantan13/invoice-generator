@@ -35,11 +35,30 @@ export default async function submitInvoiceAction(
     'other-info': '',
     'bank-info': ''
   */
-  console.log(formData);
 
   const logo = formData.get("logo");
+  const companyName = formData.get("company-name");
+  const companyAddress = formData.get("company-address");
+  const customerAddress = formData.get("customer-address");
+  const subtotal = formData.get("subtotal");
+  const otherInfo = formData.get("other-info");
+  const bankInfo = formData.get("bank-info");
 
   console.log(logo);
+  console.log(companyName);
+  console.log(companyAddress);
+  console.log(customerAddress);
+  console.log(subtotal);
+  console.log(otherInfo);
+  console.log(bankInfo);
+
+  const invoiceItems = {};
+
+  for (const key in formData) {
+    if (key.startsWith("item")) {
+      console.log(key);
+    }
+  }
 
   if (invoice.length <= 0) {
     return { status: "failed", message: "You cannot submit an empty invoice!" };

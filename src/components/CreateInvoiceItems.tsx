@@ -53,7 +53,11 @@ export default function CreateInvoiceItems({
           onRemove={removeInvoiceItem}
         />
       ))}
-      <button onClick={addInvoiceItem} className="ml-2 hover:cursor-pointer">
+      <button
+        onClick={addInvoiceItem}
+        className="ml-2 hover:cursor-pointer"
+        type="button"
+      >
         Add item
       </button>
     </div>
