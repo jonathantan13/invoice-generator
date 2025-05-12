@@ -1,8 +1,8 @@
 "use server";
 
 import { auth } from "@/auth";
-import supabase from "@/db";
 import { Item } from "@/interfaces";
+import supabase from "@/db";
 
 export default async function submitInvoiceAction(
   _prevState: { status: string; message: string },
@@ -51,13 +51,7 @@ export default async function submitInvoiceAction(
   const otherInfo = formData.get("other-info");
   const bankInfo = formData.get("bank-info");
 
-  formData.forEach((value, key) => {
-    if (typeof key === "string") {
-      if (key.startsWith("item")) {
-        console.log("item:", value);
-      }
-    }
-  });
+  // I will be back once I master JavaScript, see you in 3 months
 
   if (
     !logo ||
