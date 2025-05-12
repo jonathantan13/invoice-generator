@@ -3,7 +3,7 @@ export default function FormAdditionalAndBank() {
     <>
       <textarea
         name="other-info"
-        placeholder="Other information"
+        placeholder="Other information (Optional)"
         className="border-box h-48 resize-none border border-gray-800 px-2"
       />
       <textarea

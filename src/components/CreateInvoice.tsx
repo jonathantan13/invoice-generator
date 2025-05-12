@@ -30,6 +30,9 @@ export default function CreateInvoice() {
       toast.success(submission.message, {
         duration: 3000,
       });
+      setInvoiceItems(() => [
+        { id: "123456789", description: "", quantity: 1, unitPrice: "" },
+      ]);
     }
   }, [submission]);
 

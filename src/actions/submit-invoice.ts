@@ -11,6 +11,13 @@ export default async function submitInvoiceAction(
   const invoice: Item[] = [];
   const session = await auth();
 
+  if (!session) {
+    return {
+      status: "failed",
+      message: "You must be authenticated to send an invoice!",
+    };
+  }
+
   // formData object
   /*
     logo: File {
@@ -44,30 +51,24 @@ export default async function submitInvoiceAction(
   const otherInfo = formData.get("other-info");
   const bankInfo = formData.get("bank-info");
 
-  console.log(logo);
-  console.log(companyName);
-  console.log(companyAddress);
-  console.log(customerAddress);
-  console.log(subtotal);
-  console.log(otherInfo);
-  console.log(bankInfo);
-
-  const invoiceItems = {};
-
-  for (const key in formData) {
-    if (key.startsWith("item")) {
-      console.log(key);
+  formData.forEach((value, key) => {
+    if (typeof key === "string") {
+      if (key.startsWith("item")) {
+        console.log("item:", value);
+      }
     }
-  }
+  });
 
-  if (invoice.length <= 0) {
-    return { status: "failed", message: "You cannot submit an empty invoice!" };
-  }
-
-  if (!session) {
+  if (
+    !logo ||
+    !companyName ||
+    !companyAddress ||
+    !customerAddress ||
+    !subtotal
+  ) {
     return {
       status: "failed",
-      message: "You must be authenticated to send an invoice!",
+      message: "Please make sure you fill up all the necessary fields!",
     };
   }
 
